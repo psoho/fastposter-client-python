@@ -9,7 +9,7 @@ with open("README.md", "r") as fh:
 setup(
     name='fastposter',
     version=__version__,
-    description='a package for fastposter cloud client',
+    description='A Python client for fastposter cloud',
     long_description=long_description,
     long_description_content_type="text/markdown",
     author='Alex小新',
