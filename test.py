@@ -15,7 +15,7 @@ client.buildPoster("ced9b1d5337d494c", params=params).saveTo('xxx.png')
 
 # 获取Base64图片格式
 r = client.buildPoster("ced9b1d5337d494c", params=params, b64=True).b64String()
-print(r)
+# print(r)
 
 if __name__ == '__main__':
     pass
