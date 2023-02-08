@@ -11,11 +11,16 @@ setup(
     version=__version__,
     description='a package for fastposter cloud client',
     long_description=long_description,
-    author='Alex',
+    long_description_content_type="text/markdown",
+    author='Alex小新',
     author_email='service@fastposter.net',
-    license='MIT License',
+    license='MIT License (MIT)',
     url='https://github.com/psoho/fastposter-cloud-client-python',
-    download_url='https://github.com/psoho/fastposter-cloud-client-python/main.zip',
+    # download_url='',
     packages=find_packages(),
-    install_requires=['requests==2.28.2']
+    install_requires=['requests==2.28.2'],
+    project_urls={
+        "Documentation": "https://cloud.fastposter.net/doc/guide/",
+        "Source": "https://github.com/psoho/fastposter-cloud-client-python",
+    },
 )
