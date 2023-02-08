@@ -59,45 +59,6 @@ class Poster:
         return path
 
 
-# class PosterBuilder:
-#
-#     def __init__(self, uuid, client):
-#         self.uuid = uuid
-#         self.client = client
-#         self._params = None
-#         self.type = 'jpg'
-#         self.b64 = False
-#
-#     def png(self):
-#         self.type = 'png'
-#         return self
-#
-#     def jpg(self):
-#         self.type = 'jpg'
-#         return self
-#
-#     def build(self):
-#         return self.client.build(self.uuid, self._params, self.type, self.b64)
-#
-#     def params(self, params):
-#         self._params = params
-#         return self
-
-
-# class GetPosterArgs:
-#
-#     def __int__(self):
-#         self.uuid = ''
-#         self.type = ''
-#         self.scale = 1.0
-#         self.appKey = ''
-#         self.timestamp = ''
-#         self.nonce = ''
-#         self.payload = ''
-#         self.sign = ''
-#         self.b64 = ''
-
-
 class FastposterCloudClient:
     url = 'https://api.fastposter.net/v1/build/poster'
 
