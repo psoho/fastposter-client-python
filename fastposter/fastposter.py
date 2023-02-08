@@ -155,14 +155,14 @@ class CloudClient:
         if self.trace:
             print(str(self.seq) + " build poster payload=" + _payload)
 
+        userAgent = '' if not userAgent else userAgent
+
         headers = {
             'Client-Type': CLIENT_TYPE,
             'Client-Version': CLIENT_VERSION,
-            'cache-control': "no-cache"
+            'User-Agent': userAgent,
+            'cache-control': "no-cache",
         }
-
-        if userAgent:
-            headers['User-Agent'] = userAgent
 
         url = self.endpoint + "/v1/build/poster"
         r = requests.post(url, headers=headers, json=body)
