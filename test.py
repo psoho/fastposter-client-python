@@ -18,4 +18,5 @@ r = client.buildPoster("ced9b1d5337d494c", params=params, b64=True).b64String()
 # print(r)
 
 if __name__ == '__main__':
+    # pip config get global.index-url
     pass

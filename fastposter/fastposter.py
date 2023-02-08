@@ -18,7 +18,7 @@ CLIENT_VERSION = __version__.__version__
 CLIENT_TYPE = 'python'
 
 # 默认的用户代理
-USER_AGENT = "fastposter-cloud-client/" + CLIENT_VERSION + " (" + CLIENT_TYPE + ")"
+# USER_AGENT = "fastposter-cloud-client/" + CLIENT_VERSION + " (" + CLIENT_TYPE + ")"
 
 # 接入点地址
 ENDPOINT = 'https://api.fastposter.net'
@@ -155,13 +155,14 @@ class CloudClient:
         if self.trace:
             print(str(self.seq) + " build poster payload=" + _payload)
 
-        userAgent = userAgent if userAgent else USER_AGENT
         headers = {
             'Client-Type': CLIENT_TYPE,
             'Client-Version': CLIENT_VERSION,
-            'User-Agent': userAgent,
             'cache-control': "no-cache"
         }
+
+        if userAgent:
+            headers['User-Agent'] = userAgent
 
         url = self.endpoint + "/v1/build/poster"
         r = requests.post(url, headers=headers, json=body)
