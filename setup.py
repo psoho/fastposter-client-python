@@ -1,14 +1,19 @@
 #!/usr/bin/env python
 from io import open
 from setuptools import setup, find_packages
+from fastposter.__version__ import __version__
+
+with open("README.md", "r") as fh:
+    long_description = fh.read()
+
 setup(
-    name='fastposter-cloud-client',
-    version='1.0.0',
+    name='fastposter',
+    version=__version__,
     description='a package for fastposter cloud client',
-    long_description='fastposter-cloud python客户端，轻松开发海报。',
+    long_description=long_description,
     author='Alex',
     author_email='service@fastposter.net',
-    license='Apache License 2.0',
+    license='MIT License',
     url='https://github.com/psoho/fastposter-cloud-client-python',
     download_url='https://github.com/psoho/fastposter-cloud-client-python/main.zip',
     packages=find_packages(),
