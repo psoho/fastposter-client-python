@@ -38,24 +38,23 @@ def get_time(f):
 
 class Poster:
 
-    # Poster(traceId, type, r.content, b64)
-    def __int__(self, traceId, type, content, b64):
+    def __init__(self, traceId, type, content, b64):
         self.traceId = traceId
         self.type = type
         self.content = content
         self.size = len(content)
         self.b64 = b64
 
-    def save(self, path):
+    def saveTo(self, path):
         with open(path, 'wb') as f:
             f.write(self.content)
             print('保存海报')
 
     def save(self):
-        path = self.traceId[0:16] + "." + type;
+        path = self.traceId[0:16] + "." + self.type
         if self.b64:
             path += ".b64"
-        self.save(path)
+        self.saveTo(path)
         return path
 
 
@@ -122,7 +121,11 @@ def main():
     params = {
         'name': '你好'
     }
-    client.buildPoster("ced9b1d5337d494c", params=params).save();
+    # client.buildPoster("ced9b1d5337d494c", params=params).save();
+    args = client.buildPoster("ced9b1d5337d494c", params=params, type='pdf', onlySign=True)
+    print(args)
+    args = client.buildPoster("ced9b1d5337d494c", params=params, type='webp', onlySign=False)
+    print(args.saveTo('xxxx.webp'))
 
 
 if __name__ == '__main__':
