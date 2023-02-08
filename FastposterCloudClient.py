@@ -41,13 +41,13 @@ class Poster:
     def __init__(self, traceId, type, content, b64):
         self.traceId = traceId
         self.type = type
-        self.content = content
+        self.bytes = content
         self.size = len(content)
         self.b64 = b64
 
     def saveTo(self, path):
         with open(path, 'wb') as f:
-            f.write(self.content)
+            f.write(self.bytes)
             print('保存海报')
 
     def save(self):
@@ -121,11 +121,8 @@ def main():
     params = {
         'name': '你好'
     }
-    # client.buildPoster("ced9b1d5337d494c", params=params).save();
-    args = client.buildPoster("ced9b1d5337d494c", params=params, type='pdf', onlySign=True)
-    print(args)
-    args = client.buildPoster("ced9b1d5337d494c", params=params, type='webp', onlySign=False)
-    print(args.saveTo('xxxx.webp'))
+    r = client.buildPoster("ced9b1d5337d494c", params=params).save()
+    print(r[0:100])
 
 
 if __name__ == '__main__':
