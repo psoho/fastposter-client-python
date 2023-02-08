@@ -2,14 +2,14 @@
 
 # 发布到 https://pypi.org/
 
-#python setup.py sdist &&
-
-python setup.py bdist_wheel
-
-# && twine upload dist/* && rm -rf dist/*
+function build() {
+#  python setup.py sdist &&
+  python setup.py bdist_wheel
+}
 
 function push() {
   twine upload dist/* && rm -rf dist/*
 }
 
-push
+build && push
+
