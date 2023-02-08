@@ -8,7 +8,7 @@ from hashlib import md5
 
 import requests
 
-import __version__
+from fastposter import __version__
 
 ## 常量定义区域
 # 客户端版本
@@ -75,22 +75,42 @@ class Poster:
         self.saveTo(path)
         return path
 
+    def b64String(self):
+        if not self.b64:
+            text = """please set b64 is Ture. for example.
+client.buildPoster("ced9b1*****d494c", params=params, b64=True).b64String()
+            """
+            print(text)
+            return
+        return self.bytes.decode('utf-8')
 
-class FastposterCloudClient:
+
+class CloudClient:
     """
     海报云服务客户端
     """
 
-    def __init__(self, appKey='', appSecret='', endpoint=ENDPOINT):
+    seq = 1
+
+    @staticmethod
+    def version():
+        return CLIENT_VERSION
+
+    def __init__(self, appKey='', appSecret='', endpoint=ENDPOINT, debug=False, trace=False):
         """
         初始化一个海报云服务客户端
         :param appKey: 应用KEY
         :param appSecret: 应用密钥
         :param endpoint: 接入端地址
+        :param debug: 是否开启调试模式
+        :param trace: 是否开启着重模式
         """
+        debug = True if trace else debug
         self.appKey = appKey
         self.appSecret = appSecret
         self.endpoint = endpoint
+        self.debug = debug
+        self.trace = trace
 
     def buildPoster(self, uuid, params={}, type='png', scale=1.0, b64=False, userAgent=None, onlySign=False):
         """
@@ -105,8 +125,8 @@ class FastposterCloudClient:
         :return: 海报|签名对象
         """
 
-        payload = json.dumps(params, ensure_ascii=False)
-        payload = base64.b64encode(payload.encode(encoding='utf-8')).decode(encoding='utf-8')
+        _payload = json.dumps(params, ensure_ascii=False)
+        payload = base64.b64encode(_payload.encode(encoding='utf-8')).decode(encoding='utf-8')
         timestamp = str(int(time.time()))
         nonce = ''.join(random.sample(string.ascii_letters, 16))
         pay = payload + timestamp + nonce + self.appSecret
@@ -132,6 +152,9 @@ class FastposterCloudClient:
         if onlySign:
             return body
 
+        if self.trace:
+            print(str(self.seq) + " build poster payload=" + _payload)
+
         userAgent = userAgent if userAgent else USER_AGENT
         headers = {
             'Client-Type': CLIENT_TYPE,
@@ -148,5 +171,7 @@ class FastposterCloudClient:
             print(r.json())
 
         traceId = r.headers['fastposter-cloud-traceid']
-        print(traceId)
+
+        # 计数器累加
+        self.seq += 1
         return Poster(traceId, type, r.content, b64)
