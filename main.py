@@ -5,11 +5,17 @@ params = {
     'name': '你好',
     'age': '18'
 }
-r = client.buildPoster("ced9b1d5337d494c", params=params).b64String()
+
+# 保存图片
+path = client.buildPoster("ced9b1d5337d494c", params=params).save()
+print(path)
+
+# 保存图片到指定路径
+client.buildPoster("ced9b1d5337d494c", params=params).saveTo('xxx.png')
+
+# 获取Base64图片格式
+r = client.buildPoster("ced9b1d5337d494c", params=params, b64=True).b64String()
 print(r)
-# client.buildPoster("ced9b1d5337d494c", params=params)
-# client.buildPoster("ced9b1d5337d494c", params=params)
-# client.buildPoster("ced9b1d5337d494c", params=params)
 
 if __name__ == '__main__':
     pass
