@@ -1,14 +1,13 @@
 #!/usr/bin/env python
 from io import open
 from setuptools import setup, find_packages
-from fastposter.__version__ import __version__
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setup(
     name='fastposter',
-    version=__version__,
+    version="1.3.3",
     description='A Python client for fastposter cloud',
     long_description=long_description,
     long_description_content_type="text/markdown",

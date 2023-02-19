@@ -204,6 +204,7 @@ class Client:
         self.endpoint = endpoint
         self.debug = debug
         self.trace = trace
+        self.token = token
 
     def buildPoster(self, uuid, params={}, type='png', scale=1.0, b64=False, userAgent=None, onlySign=False):
         """
@@ -220,18 +221,18 @@ class Client:
 
         _payload = json.dumps(params, ensure_ascii=False)
         payload = base64.b64encode(_payload.encode(encoding='utf-8')).decode(encoding='utf-8')
-        timestamp = str(int(time.time()))
-        nonce = ''.join(random.sample(string.ascii_letters, 16))
-        pay = payload + timestamp + nonce + self.appSecret
-        sign = md5(pay)
+        # timestamp = str(int(time.time()))
+        # nonce = ''.join(random.sample(string.ascii_letters, 16))
+        # pay = payload + timestamp + nonce + self.appSecret
+        # sign = md5(pay)
 
         body = {
             "uuid": uuid,
-            "appKey": self.appKey,
-            "timestamp": timestamp,
-            "nonce": nonce,
+            # "appKey": self.appKey,
+            # "timestamp": timestamp,
+            # "nonce": nonce,
             "payload": payload,
-            "sign": sign,
+            # "sign": sign,
             "type": type,
         }
 
@@ -253,6 +254,7 @@ class Client:
         headers = {
             'Client-Type': CLIENT_TYPE,
             'Client-Version': CLIENT_VERSION,
+            'token': self.token,
             'User-Agent': userAgent,
             'cache-control': "no-cache",
         }

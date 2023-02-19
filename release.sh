@@ -6,7 +6,7 @@ cd `dirname $0`
 pwd
 
 function build() {
-  python3 setup.py sdist && python setup.py bdist_wheel
+  python3 setup.py sdist && python3 setup.py bdist_wheel
 }
 
 function push() {
@@ -15,8 +15,8 @@ function push() {
 
 
 function buildAndPush() {
-#    python3 setup.py sdist && python setup.py bdist_wheel && push
-    python3 setup.py sdist && push
+    python3 setup.py sdist && python3 setup.py bdist_wheel && push
+#    python3 setup.py sdist && push
 }
 
 
