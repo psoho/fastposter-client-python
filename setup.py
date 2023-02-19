@@ -21,6 +21,6 @@ setup(
     install_requires=['requests==2.28.2'],
     project_urls={
         "Documentation": "https://cloud.fastposter.net/doc/guide/",
-        "Source": "https://github.com/psoho/fastposter-cloud-client-python",
+        "Source": "https://github.com/psoho/fastposter-client-python",
     },
 )

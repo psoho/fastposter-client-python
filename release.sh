@@ -15,9 +15,10 @@ function push() {
 
 
 function buildAndPush() {
-    python3 setup.py sdist && python setup.py bdist_wheel && push
+#    python3 setup.py sdist && python setup.py bdist_wheel && push
+    python3 setup.py sdist && push
 }
 
 
-#buildAndPush
-build
+buildAndPush
+#build
