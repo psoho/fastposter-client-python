@@ -1,5 +1,7 @@
 from fastposter import CloudClient
 
+
+# client = CloudClient('1f5aa8d75f2d4bc4', '8a395182a41e41ad9318cea4e1018cdc', trace=True)
 client = CloudClient('1f5aa8d75f2d4bc4', '8a395182a41e41ad9318cea4e1018cdc', trace=True)
 params = {
     'name': '你好，中国',

@@ -1,8 +1,9 @@
+# -*- coding: UTF-8 -*-
 
 __title__ = 'fastposter'
-__description__ = 'Python client for fastposter cloud.'
+__description__ = 'fastposter make poster development easy.'
 __url__ = 'https://cloud.fastposter.net/doc/'
-__version__ = '1.1.8'
+__version__ = '1.3.0'
 __author__ = 'Alex'
 __author_email__ = 'service@fastposter.net'
 __license__ = 'MIT'

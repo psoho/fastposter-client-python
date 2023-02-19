@@ -1,2 +1,3 @@
+# -*- coding: UTF-8 -*-
 
-from fastposter.fastposter import CloudClient, Poster
+from fastposter.fastposter import CloudClient, Poster, Client

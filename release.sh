@@ -1,9 +1,12 @@
 #!/bin/bash
 
-# 发布到 https://pypi.org/
+# https://pypi.org/
+
+cd `dirname $0`
+pwd
 
 function build() {
-  python setup.py sdist && python setup.py bdist_wheel
+  python3 setup.py sdist && python setup.py bdist_wheel
 }
 
 function push() {
@@ -12,8 +15,9 @@ function push() {
 
 
 function buildAndPush() {
-    python setup.py sdist && python setup.py bdist_wheel && push
+    python3 setup.py sdist && python setup.py bdist_wheel && push
 }
 
 
-buildAndPush
+#buildAndPush
+build

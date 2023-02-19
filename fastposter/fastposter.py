@@ -1,3 +1,5 @@
+# -*- coding: UTF-8 -*-
+
 import base64
 import hashlib
 import json
@@ -171,7 +173,98 @@ class CloudClient:
         if r.headers['Content-Type'].startswith('application/json'):
             print(r.json())
 
-        traceId = r.headers['fastposter-cloud-traceid']
+        traceId = r.headers['fastposter-traceid']
+
+        # 计数器累加
+        self.seq += 1
+        return Poster(traceId, type, r.content, b64)
+
+
+
+class Client:
+    """
+    海报客户端
+    """
+
+    seq = 1
+
+    @staticmethod
+    def version():
+        return CLIENT_VERSION
+
+    def __init__(self, token='', endpoint=ENDPOINT, debug=False, trace=False):
+        """
+        初始化一个海报客户端
+        :param token: token
+        :param endpoint: 接入端地址
+        :param debug: 是否开启调试模式
+        :param trace: 是否开启着重模式
+        """
+        debug = True if trace else debug
+        self.endpoint = endpoint
+        self.debug = debug
+        self.trace = trace
+
+    def buildPoster(self, uuid, params={}, type='png', scale=1.0, b64=False, userAgent=None, onlySign=False):
+        """
+        生成海报
+        :param uuid: 海报UUID
+        :param params: 海报参数
+        :param type: 海报类型
+        :param scale: 海报缩放比 0.1 ~ 1.0
+        :param b64: 是否返回base64字符串
+        :param userAgent: 客户代理
+        :param onlySign: 只签名
+        :return: 海报|签名对象
+        """
+
+        _payload = json.dumps(params, ensure_ascii=False)
+        payload = base64.b64encode(_payload.encode(encoding='utf-8')).decode(encoding='utf-8')
+        timestamp = str(int(time.time()))
+        nonce = ''.join(random.sample(string.ascii_letters, 16))
+        pay = payload + timestamp + nonce + self.appSecret
+        sign = md5(pay)
+
+        body = {
+            "uuid": uuid,
+            "appKey": self.appKey,
+            "timestamp": timestamp,
+            "nonce": nonce,
+            "payload": payload,
+            "sign": sign,
+            "type": type,
+        }
+
+        if b64:
+            body['b64'] = True
+
+        # 校验参数
+        if scale != 1.0:
+            body['scale'] = scale
+
+        if onlySign:
+            return body
+
+        if self.trace:
+            print(str(self.seq) + " build poster payload=" + _payload)
+
+        userAgent = '' if not userAgent else userAgent
+
+        headers = {
+            'Client-Type': CLIENT_TYPE,
+            'Client-Version': CLIENT_VERSION,
+            'User-Agent': userAgent,
+            'cache-control': "no-cache",
+        }
+
+        url = self.endpoint + "/v1/build/poster"
+        r = requests.post(url, headers=headers, json=body)
+
+        # 请求出现异常
+        if r.headers['Content-Type'].startswith('application/json'):
+            print(r.json())
+
+        traceId = r.headers['fastposter-traceid']
 
         # 计数器累加
         self.seq += 1
