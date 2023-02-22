@@ -194,6 +194,8 @@ class CloudClient:
             print(r.json())
 
         traceId = r.headers.get('fastposter-traceid', timestamp)
+        if not traceId:
+            traceId = timestamp
 
         # 计数器累加
         self.seq += 1
