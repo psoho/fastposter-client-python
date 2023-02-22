@@ -3,7 +3,7 @@
 __title__ = 'fastposter'
 __description__ = 'fastposter make poster development easy.'
 __url__ = 'https://cloud.fastposter.net/doc/'
-__version__ = '1.4.1'
+__version__ = '1.4.2'
 __author__ = 'Alex'
 __author_email__ = 'service@fastposter.net'
 __license__ = 'MIT'

@@ -193,7 +193,7 @@ class CloudClient:
         if r.headers['Content-Type'].startswith('application/json'):
             print(r.json())
 
-        traceId = r.headers['fastposter-traceid']
+        traceId = r.headers.get('fastposter-traceid', timestamp)
 
         # 计数器累加
         self.seq += 1
