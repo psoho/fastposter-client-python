@@ -3,6 +3,7 @@
 import base64
 import hashlib
 import json
+import os.path
 import random
 import string
 import time
@@ -38,6 +39,10 @@ def md5(params):
     return data_digest.hex().lower()
 
 
+def get_suffix(uri):
+    return os.path.splitext(uri)[-1]
+
+
 class Poster:
     """
     海报对象
@@ -59,25 +64,40 @@ class Poster:
 
     def saveTo(self, path):
         """
-        保存到指定目录
-        :param path:
+        保存到指定路径
+        :param path: 完整的存放路径
         :return: None
         """
         with open(path, 'wb') as f:
             f.write(self.bytes)
 
-    def save(self):
+    def save(self, filename=None, dirname=None):
         """
         保存海报
+        :param filename: 文件名称，默认为随机文件名
+        :param dirname: 指定存放目录，默认为当前目录。目录不存在会自动创建
         :return: 文件路径
         """
-        path = self.traceId[0:16] + "." + self.type
+        path = ''
+        if dirname:
+            if not os.path.exists(dirname):
+                os.makedirs(dirname)
+            path = dirname + "/"
+        if filename:
+            if not get_suffix(filename):
+                filename += "." + self.type
+            path += filename
+        else:
+            path += self.traceId[0:16] + "." + self.type
         if self.b64:
             path += ".b64"
         self.saveTo(path)
         return path
 
     def b64String(self):
+        """
+        以base64格式输出
+        """
         if not self.b64:
             text = """please set b64 is Ture. for example.
 client.buildPoster("ced9b1*****d494c", params=params, b64=True).b64String()
@@ -178,7 +198,6 @@ class CloudClient:
         # 计数器累加
         self.seq += 1
         return Poster(traceId, type, r.content, b64)
-
 
 
 class Client:
