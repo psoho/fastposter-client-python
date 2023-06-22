@@ -107,6 +107,7 @@ client.buildPoster("ced9b1*****d494c", params=params, b64=True).b64String()
         return self.bytes.decode('utf-8')
 
 
+@DeprecationWarning
 class CloudClient:
     """
     海报云服务客户端

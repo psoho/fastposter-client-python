@@ -7,7 +7,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name='fastposter',
-    version="1.4.3",
+    version="1.5.0",
     description='A Python client for fastposter cloud',
     long_description=long_description,
     long_description_content_type="text/markdown",
