@@ -7,7 +7,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name='fastposter',
-    version="1.5.0",
+    version="1.6.1",
     description='A Python client for fastposter cloud',
     long_description=long_description,
     long_description_content_type="text/markdown",
@@ -17,9 +17,9 @@ setup(
     url='https://github.com/psoho/fastposter-client-python',
     # download_url='',
     packages=find_packages(),
-    install_requires=['requests==2.28.2'],
+    install_requires=['requests==2.31.0'],
     project_urls={
-        "Documentation": "https://cloud.fastposter.net/doc/guide/",
+        "Documentation": "https://fastposter.net/doc/sdk/python.html",
         "Source": "https://github.com/psoho/fastposter-client-python",
     },
 )

@@ -2,8 +2,8 @@
 
 __title__ = 'fastposter'
 __description__ = 'fastposter make poster development easy.'
-__url__ = 'https://cloud.fastposter.net/doc/'
-__version__ = '1.5.0'
+__url__ = 'https://fastposter.net/doc/sdk/python.html'
+__version__ = '1.6.1'
 __author__ = 'Alex'
 __author_email__ = 'service@fastposter.net'
 __license__ = 'MIT'
